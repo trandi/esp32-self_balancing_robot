@@ -1,0 +1,26 @@
+#### STEPPER
+	### TIMINGS
+		## Docs 
+			# page 7 .pdf it takes 1700uS to wake up from sleep, vs 0.65uS to enable -> use ENABLE, as I don't care about the current stepping tables, etc. ...
+			# 250kHz MAX
+    	## Experimental
+			# in Micro stepping mode (1/32 step)  analogWrite(B14, 0.1, {freq: 65000})
+    		# in normal stepping mode (1/1 step)  analogWrite(B14, 0.5, {freq: 1500})
+	
+#### MPU6050
+	### http://www.brokking.net/yabr_main.html
+    ### https://github.com/espruino/EspruinoDocs/commits/master/devices/MPU6050.js
+    ### DLPF
+      ## https://ulrichbuschbaum.wordpress.com/2015/01/18/using-the-mpu6050s-dlpf/
+      ## 
+      
+      
+
+Gyro with 500degs / sec full scale => output = 65.5 when 1deg/sec
+Integrating every 20ms (50HZ)
+Gyro out / (1000ms / 20) / 65.5 = Gyro out * 0.000305344 = degrees each iteration
+
+Angle += Gyro* 0.000305344
+
+Accelerometre with +- 8G full scale => output = 4096 for 1G
+
